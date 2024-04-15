@@ -21,8 +21,23 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(1);
     }
+
+    public void ContinueGame()
+    {
+
+    }
+    public void LoadGame()
+    {
+
+    }
+
+    public void SettingsMenu()
+    {
+        SceneManager.LoadScene("SettingsMenu");
+    }
     public void QuitGame()
     {
         Application.Quit();
+        Debug.Log("Quit Successfully!");
     }
 }

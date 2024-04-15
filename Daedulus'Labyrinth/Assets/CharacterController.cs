@@ -1,13 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Audio;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class CharacterController : MonoBehaviour
 {
     public float moveSpeed = 5f; // speed of movement
+    public bool isPaused;
+    public GameObject ButtonList;
 
     void Start()
     {
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation; // Freeze rotation
+        ButtonList.SetActive(false);
     }
 
     void Update()
@@ -30,7 +37,23 @@ public class CharacterController : MonoBehaviour
         {
             movement += Vector3.right;
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //if (isPaused)
+            // {
+            //     ResumeGame();
+            // }
+            // else
+            //  {
+            //      PauseGame();
+            //  }
+
+            SceneManager.LoadScene("MainMenu");
+        }
 
         transform.Translate(movement * moveSpeed * Time.deltaTime);
+
+        
     }
+
 }
