@@ -50,6 +50,17 @@ public class CharacterController : MonoBehaviour
 
             SceneManager.LoadScene("MainMenu");
         }
+    void PauseGame(){
+        isPaused = true;
+        Time.timeScale = 0f; // Pause the game
+        ButtonList.SetActive(true); 
+    }
+
+    public void ResumeGame(){
+        isPaused = false;
+        Time.timeScale = 1f; // Resume normal time scale
+        ButtonList.SetActive(false);
+    }
 
         transform.Translate(movement * moveSpeed * Time.deltaTime);
 
