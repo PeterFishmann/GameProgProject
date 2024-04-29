@@ -37,6 +37,15 @@ public class CharacterController : MonoBehaviour
         {
             movement += Vector3.right;
         }
+        if (Input.GetKeyDown(KeyCode.E)) {
+            Interact();
+        }
+        if (Input.GetMouseButtonDown(0)){
+            Attack();
+        }
+        if (Input.GetMouseButtonDown(1)){
+            Dodge();
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             //if (isPaused)
