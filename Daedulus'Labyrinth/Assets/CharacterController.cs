@@ -38,13 +38,13 @@ public class CharacterController : MonoBehaviour
             movement += Vector3.right;
         }
         if (Input.GetKeyDown(KeyCode.E)) {
-            Interact();
+            //Interact();
         }
         if (Input.GetMouseButtonDown(0)){
-            Attack();
+            //Attack();
         }
         if (Input.GetMouseButtonDown(1)){
-            Dodge();
+            //Dodge();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -65,11 +65,11 @@ public class CharacterController : MonoBehaviour
         ButtonList.SetActive(true); 
     }
 
-    public void ResumeGame(){
-        isPaused = false;
-        Time.timeScale = 1f; // Resume normal time scale
-        ButtonList.SetActive(false);
-    }
+    //public void ResumeGame(){
+    //    isPaused = false;
+    //    Time.timeScale = 1f; // Resume normal time scale
+    //    ButtonList.SetActive(false);
+    //}
 
         transform.Translate(movement * moveSpeed * Time.deltaTime);
 
