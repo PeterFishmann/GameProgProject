@@ -10,6 +10,10 @@ public class CharacterController : MonoBehaviour
     public int health; // player health
     public Slider healthSlider; // reference to the health slider
     public bool isPaused;
+    Animator animator;
+    int hits;
+    public GameObject Enemy;
+
 
     void Start()
     {
@@ -18,6 +22,8 @@ public class CharacterController : MonoBehaviour
 
         health = 100; // initialize health
         UpdateHealthUI(); // update the health UI
+        animator = GetComponent<Animator>();
+        hits = 0;
     }
 
     void Update()
@@ -40,8 +46,24 @@ public class CharacterController : MonoBehaviour
         {
             movement += Vector3.right;
         }
+        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Space))
+        {
+            animator.Play("Attack02_SwordAndShiled");
+        }
 
         transform.Translate(movement * moveSpeed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //if()
+        Debug.Log("Vlad");
+        hits++;
+        Debug.Log(hits);
+        if(hits == 4)
+        {
+            Destroy(Enemy);  
+        }
     }
 
     void PauseGame()
@@ -56,6 +78,13 @@ public class CharacterController : MonoBehaviour
         if (healthSlider != null)
         {
             healthSlider.value = health;
+        }
+    }
+    void Attack()
+    {
+        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Space))
+        {
+            animator.Play("Attack02_SwordAndShiled");
         }
     }
 }

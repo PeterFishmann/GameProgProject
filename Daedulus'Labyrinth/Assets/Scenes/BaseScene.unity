@@ -782,6 +782,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288284517}
   m_CullTransparentMesh: 1
+--- !u!1 &302379479 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5422481604456270390, guid: 25b33ce3594fab74e833d1112d769d1a, type: 3}
+  m_PrefabInstance: {fileID: 6956234694229513001}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &307587046
 GameObject:
   m_ObjectHideFlags: 0
@@ -2797,7 +2802,6 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -3286,6 +3290,8 @@ GameObject:
   - component: {fileID: 1773761181}
   - component: {fileID: 1773761180}
   - component: {fileID: 1773761179}
+  - component: {fileID: 1773761182}
+  - component: {fileID: 1773761183}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -3383,7 +3389,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1773761179}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1773761181
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3392,6 +3410,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773761177}
   m_CullTransparentMesh: 1
+--- !u!114 &1773761182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773761177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ba5d9e2a86c9a41a2722ccbea39f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
+--- !u!114 &1773761183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773761177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ba5d9e2a86c9a41a2722ccbea39f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
+--- !u!1 &1786875548 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7721683195214582505, guid: c9013789a8d234d43ad2a8e7656621b3, type: 3}
+  m_PrefabInstance: {fileID: 1116212247930959059}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1786875552
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786875548}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4692214948189147205, guid: de392f919a34e4e4c94a6e77ef08a22d, type: 3}
 --- !u!1001 &1801811497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4107,6 +4170,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2042457330, guid: c9013789a8d234d43ad2a8e7656621b3, type: 3}
+      propertyPath: Enemy
+      value: 
+      objectReference: {fileID: 302379479}
+    - target: {fileID: 2042457330, guid: c9013789a8d234d43ad2a8e7656621b3, type: 3}
       propertyPath: health
       value: 100
       objectReference: {fileID: 0}
@@ -4119,9 +4186,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 326253031}
     - target: {fileID: 8220295420659705353, guid: c9013789a8d234d43ad2a8e7656621b3, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 0308cf4e83cf517488b60af58b290fe0, type: 3}
+    - target: {fileID: 8220295420659705353, guid: c9013789a8d234d43ad2a8e7656621b3, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9100000, guid: 2be64f57d7d213648aa9b2e5e8e0a39b, type: 2}
     - target: {fileID: 8475460437564920659, guid: c9013789a8d234d43ad2a8e7656621b3, type: 3}
       propertyPath: m_RootOrder
       value: 17
