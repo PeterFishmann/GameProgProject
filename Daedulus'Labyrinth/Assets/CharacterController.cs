@@ -40,23 +40,6 @@ public class CharacterController : MonoBehaviour
         {
             movement += Vector3.right;
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            //if (isPaused)
-            // {
-            //     ResumeGame();
-            // }
-            // else
-            //  {
-            //      PauseGame();
-            //  }
-
-            SceneManager.LoadScene("MainMenu");
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            PauseGame();
-        }
 
         transform.Translate(movement * moveSpeed * Time.deltaTime);
     }
