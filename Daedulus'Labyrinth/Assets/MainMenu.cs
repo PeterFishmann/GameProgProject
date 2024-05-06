@@ -7,37 +7,26 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-/*    [SerializeField] private AudioMixer myMixed;
-    [SerializeField] private Slider musicSlider;
+    // Reference to the GameObject you want to rotate
+    public GameObject rotatingObject;
+    // Speed of rotation
+    public float rotationSpeed = 10f;
 
-    public void SetMusicVolume()
+    void Update()
     {
-        float volume = musicSlider.value;
-        myMixed.SetFloat("music", Mathf.Log10(volume) * 20);
-    }*/
-
+        // Rotate the GameObject counterclockwise around its center
+        rotatingObject.transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
+        rotatingObject.transform.Rotate(Vector3.forward, -rotationSpeed * Time.deltaTime);
+        rotatingObject.transform.Rotate(Vector3.right, -rotationSpeed * Time.deltaTime);
+    }
 
     public void PlayGame()
     {
         SceneManager.LoadSceneAsync(1);
     }
 
-    public void ContinueGame()
-    {
-
-    }
-    public void LoadGame()
-    {
-
-    }
-
-    public void SettingsMenu()
-    {
-        SceneManager.LoadScene("SettingsMenu");
-    }
     public void QuitGame()
     {
         Application.Quit();
-        Debug.Log("Quit Successfully!");
     }
 }
