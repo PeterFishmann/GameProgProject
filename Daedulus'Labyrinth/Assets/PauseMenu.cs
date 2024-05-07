@@ -2,10 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] Text numberText; 
+    int currentNumber = 0; 
+    int targetNumber = 5; 
+    float updateInterval = 5f; 
+    float timer = 0f;
 
     void Update()
     {
@@ -20,6 +26,21 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
+        if (currentNumber < targetNumber)
+        {
+            timer += Time.deltaTime;
+            if (timer >= updateInterval)
+            {
+                currentNumber++;
+                UpdateNumberText();
+                timer = 0f;
+            }
+        }
+    }
+
+    void UpdateNumberText()
+    {
+        numberText.text = currentNumber.ToString();
     }
 
     public void Pause()
@@ -42,5 +63,10 @@ public class PauseMenu : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
