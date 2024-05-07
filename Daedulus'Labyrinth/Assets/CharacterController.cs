@@ -18,7 +18,6 @@ public class CharacterController : MonoBehaviour
     {
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation; // Freeze rotation
-
         health = 100; // initialize health
         UpdateHealthUI(); // update the health UI
         animator = GetComponent<Animator>();
@@ -58,12 +57,11 @@ public class CharacterController : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             hits++;
-            Debug.Log("Hits: " + hits);
-
             if (hits == 4)
             {
                 Destroy(other.gameObject);
                 hits = 0;
+                SceneManager.LoadScene("MainDungeon");
             }
         }
     }

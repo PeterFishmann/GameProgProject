@@ -1,3 +1,4 @@
+using DunGen.Demo;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,9 +14,9 @@ public class NpcController : MonoBehaviour
     bool walkpointSet;
     Animator animator;
     [SerializeField] float Range;
-
     [SerializeField] float sightRange;
     bool playerInSight;
+    ParticleSystem ps;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,8 @@ public class NpcController : MonoBehaviour
         player = GameObject.Find("MaleCharacterPBR");
         animator = GetComponent<Animator>();
         animator.enabled = false;
+        ps = GetComponent<ParticleSystem>();
+        ps.Stop();
     }
 
     // Update is called once per frame
@@ -30,15 +33,7 @@ public class NpcController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "MaleCharacterPBR") {
-        animator.enabled = true;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name == "MaleCharacterPBR")
-        {
-            Debug.Log("Player Got hit");
+            animator.enabled = true;
         }
     }
 
