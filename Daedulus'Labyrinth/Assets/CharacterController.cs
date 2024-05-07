@@ -12,7 +12,6 @@ public class CharacterController : MonoBehaviour
     public bool isPaused;
     Animator animator;
     int hits;
-    public GameObject Enemy;
 
 
     void Start()
@@ -56,13 +55,16 @@ public class CharacterController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if()
-        Debug.Log("Vlad");
-        hits++;
-        Debug.Log(hits);
-        if(hits == 4)
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            Destroy(Enemy);  
+            hits++;
+            Debug.Log("Hits: " + hits);
+
+            if (hits == 4)
+            {
+                Destroy(other.gameObject);
+                hits = 0;
+            }
         }
     }
 
