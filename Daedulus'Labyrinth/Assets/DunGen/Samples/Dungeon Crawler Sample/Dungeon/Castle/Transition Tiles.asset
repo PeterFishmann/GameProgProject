@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileWeights:
     Weights:
-    - Value: {fileID: 1417826763723635605, guid: 12dafe59eb86fa74e8a69ea5bc029452,
-        type: 3}
+    - Value: {fileID: 1417826763723635605, guid: 12dafe59eb86fa74e8a69ea5bc029452, type: 3}
       MainPathWeight: 1
       BranchPathWeight: 1
       DepthWeightScale:
@@ -47,8 +46,7 @@ MonoBehaviour:
   - Socket: {fileID: 11400000, guid: 1007b9bcef366ff47acb7496274eb6b9, type: 2}
     LockPrefabs:
       Weights:
-      - Value: {fileID: 5068706009228785542, guid: 6a2fba95872fd5a4bbee82c9b4733335,
-          type: 3}
+      - Value: {fileID: 5068706009228785542, guid: 6a2fba95872fd5a4bbee82c9b4733335, type: 3}
         MainPathWeight: 1
         BranchPathWeight: 1
         DepthWeightScale:
