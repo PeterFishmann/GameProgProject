@@ -5839,7 +5839,7 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0.5
+  m_HorizontalDamping: 0
   m_VerticalDamping: 0.5
   m_ScreenX: 0.5
   m_ScreenY: 0.5
@@ -8557,7 +8557,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1154652664}
-  m_LocalRotation: {x: 0.44828317, y: -0.0000000062505077, z: 0.0000000031346048, w: 0.89389163}
+  m_LocalRotation: {x: 0.44828317, y: 0.000000021751514, z: -0.000000010908298, w: 0.89389163}
   m_LocalPosition: {x: 0.52440786, y: 7.123121, z: -18.024845}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9305,7 +9305,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337162425}
-  m_LocalRotation: {x: 0.44828317, y: -0.0000000062505077, z: 0.0000000031346048, w: 0.89389163}
+  m_LocalRotation: {x: 0.44828317, y: 0.000000021751514, z: -0.000000010908298, w: 0.89389163}
   m_LocalPosition: {x: 0.52440786, y: 7.123121, z: -18.024845}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12049,7 +12049,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

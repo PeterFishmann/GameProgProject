@@ -12,6 +12,8 @@ public class CharacterController : MonoBehaviour
     public bool isPaused;
     Animator animator;
     int hits;
+    public float mouseSensitivity = 450f;
+    private float rotationY = 0f;
 
 
     void Start()
@@ -50,6 +52,12 @@ public class CharacterController : MonoBehaviour
         }
 
         transform.Translate(movement * moveSpeed * Time.deltaTime);
+
+
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        rotationY += mouseX;
+        transform.rotation = Quaternion.Euler(0, rotationY, 0);
+
     }
 
     private void OnTriggerEnter(Collider other)
