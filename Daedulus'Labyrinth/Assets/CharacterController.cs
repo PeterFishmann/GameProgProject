@@ -14,6 +14,7 @@ public class CharacterController : MonoBehaviour
     int hits;
     public float mouseSensitivity = 450f;
     private float rotationY = 0f;
+    public float turnSpeed = 100f;
 
 
     void Start()
@@ -29,29 +30,36 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         Vector3 movement = Vector3.zero;
+        float turn = 0f;
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             movement += Vector3.forward;
-        }
+        } 
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             movement += Vector3.back;
+            RotateBackwards();
+
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             movement += Vector3.left;
+            turn = -1f;
         }
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             movement += Vector3.right;
+            turn = 1f;
         }
         if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Space))
         {
             animator.Play("Attack02_SwordAndShiled");
         }
+        
 
         transform.Translate(movement * moveSpeed * Time.deltaTime);
+        transform.Rotate(0, turn * turnSpeed * Time.deltaTime, 0);
 
 
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
@@ -72,6 +80,11 @@ public class CharacterController : MonoBehaviour
                 SceneManager.LoadScene("MainDungeon");
             }
         }
+    }
+
+    void RotateBackwards()
+    {
+        transform.Rotate(0, 180f, 0);
     }
 
     void PauseGame()
