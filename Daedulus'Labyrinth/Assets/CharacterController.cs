@@ -38,7 +38,7 @@ public class CharacterController : MonoBehaviour
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             movement += Vector3.back;
-            RotateBackwards();
+            //RotateBackwards();
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
