@@ -16,7 +16,6 @@ public class CharacterController : MonoBehaviour
     private float rotationY = 0f;
     public float turnSpeed = 100f;
 
-
     void Start()
     {
         Rigidbody rb = GetComponent<Rigidbody>();
@@ -35,12 +34,11 @@ public class CharacterController : MonoBehaviour
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             movement += Vector3.forward;
-        } 
+        }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             movement += Vector3.back;
             RotateBackwards();
-
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
@@ -56,19 +54,16 @@ public class CharacterController : MonoBehaviour
         {
             animator.Play("Attack02_SwordAndShiled");
         }
-        
 
         transform.Translate(movement * moveSpeed * Time.deltaTime);
         transform.Rotate(0, turn * turnSpeed * Time.deltaTime, 0);
 
-
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         rotationY += mouseX;
         transform.rotation = Quaternion.Euler(0, rotationY, 0);
-
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
@@ -79,6 +74,20 @@ public class CharacterController : MonoBehaviour
                 hits = 0;
                 SceneManager.LoadScene("MainDungeon");
             }
+        }
+        else if (other.gameObject.CompareTag("Door"))
+        {
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.isKinematic = true; // Make player kinematic to avoid physics interactions
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Door"))
+        {
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.isKinematic = false; // Re-enable physics interactions
         }
     }
 
@@ -101,6 +110,7 @@ public class CharacterController : MonoBehaviour
             healthSlider.value = health;
         }
     }
+
     void Attack()
     {
         if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Space))

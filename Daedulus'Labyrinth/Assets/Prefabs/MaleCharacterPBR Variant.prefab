@@ -217,7 +217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8189980434977739222, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: m_Name
-      value: MaleCharacterPBR
+      value: MaleCharacterPBR Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8189980434977739222, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: m_Layer
@@ -245,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8855052669661678444, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.52440786
+      value: 0.548
       objectReference: {fileID: 0}
     - target: {fileID: 8855052669661678444, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: m_LocalPosition.y
@@ -324,10 +324,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.6166265
+  m_Radius: 0.28526476
+  m_Height: 1.2254531
   m_Direction: 1
-  m_Center: {x: 0, y: 0.7685176, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &2042457330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,5 +341,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  health: 0
+  healthSlider: {fileID: 0}
   isPaused: 0
-  ButtonList: {fileID: 0}
+  mouseSensitivity: 450
+  turnSpeed: 100
