@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
-    [SerializeField] Text numberText; 
-    int currentNumber = 0; 
-    int targetNumber = 5; 
-    float updateInterval = 5f; 
+    [SerializeField] Text numberText;
+    public int currentNumber = 0;  // Made public to allow access from HermesController
+    int targetNumber = 5;
+    float updateInterval = 5f;
     float timer = 0f;
 
     void Update()
@@ -38,7 +38,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    void UpdateNumberText()
+    public void UpdateNumberText()
     {
         numberText.text = currentNumber.ToString();
     }

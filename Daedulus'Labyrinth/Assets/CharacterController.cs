@@ -81,15 +81,7 @@ public class CharacterController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Wings"))
-        {
-            if (!isSpeedBoosted)
-            {
-                IncreaseSpeed(5f);
-                Destroy(other.gameObject);
-            }
-        }
-        else if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
             hits++;
             if (hits == 4)
@@ -127,6 +119,21 @@ public class CharacterController : MonoBehaviour
         speedBoostTimer = speedBoostDuration;
     }
 
+    public void TryIncreaseSpeed(PauseMenu pauseMenu, float speedIncrease, GameObject powerObject)
+    {
+        if (pauseMenu.currentNumber >= 2)
+        {
+            IncreaseSpeed(speedIncrease);
+            pauseMenu.currentNumber -= 2;  // Subtract 2 from currentNumber
+            pauseMenu.UpdateNumberText();  // Update the displayed number
+            Destroy(powerObject);
+        }
+        else
+        {
+            Debug.Log("Power cannot be used. The number is less than 2.");
+        }
+    }
+
     public void Heal(int amount)
     {
         health += amount;
@@ -135,6 +142,23 @@ public class CharacterController : MonoBehaviour
             health = 100;
         }
         UpdateHealthUI();
+    }
+
+    public void TryHeal(PauseMenu pauseMenu, int healAmount, GameObject powerObject)
+    {
+        if (pauseMenu.currentNumber >= 1 && health < 100)
+        {
+            int remainingHeal = 100 - health;
+            int actualHeal = Mathf.Min(healAmount, remainingHeal);
+            Heal(actualHeal);
+            pauseMenu.currentNumber--;  // Subtract 1 from currentNumber
+            pauseMenu.UpdateNumberText();  // Update the displayed number
+            Destroy(powerObject);
+        }
+        else
+        {
+            Debug.Log("Healing power cannot be used. The number is less than 1 or player's health is full.");
+        }
     }
 
     void PauseGame()

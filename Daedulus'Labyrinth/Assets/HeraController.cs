@@ -5,15 +5,21 @@ using UnityEngine;
 public class HeraController : MonoBehaviour
 {
     public int healAmount = 10;
-    public float rotationSpeed = 50f;
+    public float rotationSpeed = 25f;
     public float bobHeight = 0.25f;
     public float bobSpeed = 1f;
 
     private Vector3 originalPosition;
+    private PauseMenu pauseMenu;
 
     void Start()
     {
         originalPosition = transform.position;
+        pauseMenu = FindObjectOfType<PauseMenu>(); // Finds the PauseMenu in the scene
+        if (pauseMenu == null)
+        {
+            Debug.LogError("PauseMenu not found in the scene!");
+        }
     }
 
     void Update()
@@ -29,12 +35,9 @@ public class HeraController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             CharacterController characterController = other.GetComponent<CharacterController>();
-            if (characterController != null && characterController.health < 100)
+            if (characterController != null)
             {
-                int remainingHeal = 100 - characterController.health;
-                int actualHeal = Mathf.Min(healAmount, remainingHeal);
-                characterController.Heal(actualHeal);
-                Destroy(gameObject); // Destroy only if healing was done
+                characterController.TryHeal(pauseMenu, healAmount, this.gameObject);
             }
         }
     }

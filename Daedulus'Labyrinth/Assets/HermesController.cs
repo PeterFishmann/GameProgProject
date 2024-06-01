@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class HermesController : MonoBehaviour
 {
-    public float speedIncrease = 2f; 
-    public float rotationSpeed = 50f; 
-    public float bobHeight = 0.25f; 
-    public float bobSpeed = 1f; 
+    public float speedIncrease = 2f;
+    public float rotationSpeed = 25f;
+    public float bobHeight = 0.25f;
+    public float bobSpeed = 1f;
 
     private Vector3 originalPosition;
+    private PauseMenu pauseMenu;
 
     void Start()
     {
         originalPosition = transform.position;
+        pauseMenu = FindObjectOfType<PauseMenu>(); // Finds the PauseMenu in the scene
+        if (pauseMenu == null)
+        {
+            Debug.LogError("PauseMenu not found in the scene!");
+        }
     }
 
     void Update()
@@ -31,8 +37,7 @@ public class HermesController : MonoBehaviour
             CharacterController characterController = other.GetComponent<CharacterController>();
             if (characterController != null)
             {
-                characterController.IncreaseSpeed(speedIncrease);
-                Destroy(gameObject);
+                characterController.TryIncreaseSpeed(pauseMenu, speedIncrease, this.gameObject);
             }
         }
     }
