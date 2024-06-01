@@ -26,7 +26,7 @@ public class CharacterController : MonoBehaviour
     {
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
-        health = 100;
+        health = 50;
         UpdateHealthUI();
         animator = GetComponent<Animator>();
         hits = 0;
@@ -125,6 +125,16 @@ public class CharacterController : MonoBehaviour
         moveSpeed += amount;
         isSpeedBoosted = true;
         speedBoostTimer = speedBoostDuration;
+    }
+
+    public void Heal(int amount)
+    {
+        health += amount;
+        if (health > 100)
+        {
+            health = 100;
+        }
+        UpdateHealthUI();
     }
 
     void PauseGame()
