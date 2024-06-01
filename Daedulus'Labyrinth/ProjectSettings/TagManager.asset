@@ -9,6 +9,8 @@ TagManager:
   - Door
   - DungeonGenerator
   - PlayerSpawn
+  - Wings
+  - Wreath
   layers:
   - Default
   - TransparentFX

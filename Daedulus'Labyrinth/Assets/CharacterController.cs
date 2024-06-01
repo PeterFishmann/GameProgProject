@@ -6,28 +6,44 @@ using UnityEngine.SceneManagement;
 
 public class CharacterController : MonoBehaviour
 {
-    public float moveSpeed = 5f; // speed of movement
-    public int health; // player health
-    public Slider healthSlider; // reference to the health slider
+    public float moveSpeed = 5f;
+    public int health;
+    public Slider healthSlider;
+
     public bool isPaused;
     Animator animator;
     int hits;
-    public float mouseSensitivity = 450f;
+
+    public float mouseSensitivity = 250f;
     private float rotationY = 0f;
     public float turnSpeed = 100f;
+
+    private bool isSpeedBoosted = false;
+    private float speedBoostDuration = 15f;
+    private float speedBoostTimer = 0f;
 
     void Start()
     {
         Rigidbody rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotation; // Freeze rotation
-        health = 100; // initialize health
-        UpdateHealthUI(); // update the health UI
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        health = 50;
+        UpdateHealthUI();
         animator = GetComponent<Animator>();
         hits = 0;
     }
 
     void Update()
     {
+        if (isSpeedBoosted)
+        {
+            speedBoostTimer -= Time.deltaTime;
+            if (speedBoostTimer <= 0)
+            {
+                isSpeedBoosted = false;
+                moveSpeed = 5f;
+            }
+        }
+
         Vector3 movement = Vector3.zero;
         float turn = 0f;
 
@@ -38,7 +54,7 @@ public class CharacterController : MonoBehaviour
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             movement += Vector3.back;
-            RotateBackwards();
+            //RotateBackwards();
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
@@ -65,7 +81,15 @@ public class CharacterController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Wings"))
+        {
+            if (!isSpeedBoosted)
+            {
+                IncreaseSpeed(5f);
+                Destroy(other.gameObject);
+            }
+        }
+        else if (other.gameObject.CompareTag("Enemy"))
         {
             hits++;
             if (hits == 4)
@@ -78,7 +102,7 @@ public class CharacterController : MonoBehaviour
         else if (other.gameObject.CompareTag("Door"))
         {
             Rigidbody rb = GetComponent<Rigidbody>();
-            rb.isKinematic = true; // Make player kinematic to avoid physics interactions
+            rb.isKinematic = true;
         }
     }
 
@@ -87,7 +111,7 @@ public class CharacterController : MonoBehaviour
         if (other.gameObject.CompareTag("Door"))
         {
             Rigidbody rb = GetComponent<Rigidbody>();
-            rb.isKinematic = false; // Re-enable physics interactions
+            rb.isKinematic = false;
         }
     }
 
@@ -96,15 +120,31 @@ public class CharacterController : MonoBehaviour
         transform.Rotate(0, 180f, 0);
     }
 
+    public void IncreaseSpeed(float amount)
+    {
+        moveSpeed += amount;
+        isSpeedBoosted = true;
+        speedBoostTimer = speedBoostDuration;
+    }
+
+    public void Heal(int amount)
+    {
+        health += amount;
+        if (health > 100)
+        {
+            health = 100;
+        }
+        UpdateHealthUI();
+    }
+
     void PauseGame()
     {
         isPaused = true;
-        Time.timeScale = 0f; // Pause the game
+        Time.timeScale = 0f;
     }
 
     void UpdateHealthUI()
     {
-        // Update the health slider value
         if (healthSlider != null)
         {
             healthSlider.value = health;
