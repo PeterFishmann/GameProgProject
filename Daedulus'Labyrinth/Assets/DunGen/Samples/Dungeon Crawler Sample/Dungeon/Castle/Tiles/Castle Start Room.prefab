@@ -388,8 +388,8 @@ GameObject:
   - component: {fileID: 5402685184331945647}
   - component: {fileID: 4830648915053368908}
   m_Layer: 0
-  m_Name: Player Spawn
-  m_TagString: Untagged
+  m_Name: PlayerSpawn
+  m_TagString: PlayerSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

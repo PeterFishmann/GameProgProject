@@ -147,6 +147,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Double Doorframe
       objectReference: {fileID: 0}
+    - target: {fileID: 4063667788801791604, guid: 4aa8de0e18c8bc242a046c6a1788d545, type: 3}
+      propertyPath: m_Size.x
+      value: 2.6462665
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063667788801791604, guid: 4aa8de0e18c8bc242a046c6a1788d545, type: 3}
+      propertyPath: m_Center.x
+      value: 0.005762875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063667788801791604, guid: 4aa8de0e18c8bc242a046c6a1788d545, type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063667788801791604, guid: 4aa8de0e18c8bc242a046c6a1788d545, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5710410550185876517, guid: 4aa8de0e18c8bc242a046c6a1788d545, type: 3}
       propertyPath: m_RootOrder
       value: 2
