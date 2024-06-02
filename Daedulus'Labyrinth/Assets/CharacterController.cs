@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,8 @@ public class CharacterController : MonoBehaviour
         UpdateHealthUI();
         animator = GetComponent<Animator>();
         hits = 0;
+        pauseMenu.SetActive(false);
+
     }
 
     void Update()
@@ -46,7 +49,10 @@ public class CharacterController : MonoBehaviour
 
         Vector3 movement = Vector3.zero;
         float turn = 0f;
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pauseMenu.SetActive(true);
+        }
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             movement += Vector3.forward;
