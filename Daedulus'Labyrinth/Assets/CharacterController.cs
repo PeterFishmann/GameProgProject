@@ -22,6 +22,9 @@ public class CharacterController : MonoBehaviour
     private float speedBoostDuration = 15f;
     private float speedBoostTimer = 0f;
 
+    private float attack04Cooldown = 15f; // Cooldown duration for Attack04
+    private float attack04Timer = 0f; // Timer to track cooldown
+
     public GameObject sword; // Reference to the sword GameObject
 
     [SerializeField] GameObject pauseMenu; // Declare pauseMenu at the class level
@@ -58,6 +61,12 @@ public class CharacterController : MonoBehaviour
             }
         }
 
+        // Update the cooldown timer for Attack04
+        if (attack04Timer > 0)
+        {
+            attack04Timer -= Time.deltaTime;
+        }
+
         Vector3 movement = Vector3.zero;
         float turn = 0f;
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -83,36 +92,28 @@ public class CharacterController : MonoBehaviour
             movement += Vector3.right;
             turn = 1f;
         }
-        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Space))
-        {
-            animator.Play("Attack02_SwordAndShiled");
-        }
 
-        //Attack System with light attacks and 1 kind of heavy attack
+        // Simle Attacks
         if (Input.GetKey(KeyCode.Space))
         {
             animator.Play("Attack02_SwordAndShiled");
         }
 
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKey(KeyCode.E))
         {
             animator.Play("Attack03_SwordAndShiled");
         }
 
-        if (Input.GetKey(KeyCode.Q))
+        // Heavy attack with cooldown
+        if (Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.R) && attack04Timer <= 0)
         {
-            if (Input.GetKey(KeyCode.R))
-            {
-                animator.Play("Attack04_SwordAndShiled");
-            }
+            animator.Play("Attack04_SwordAndShiled");
+            attack04Timer = attack04Cooldown; // Reset the cooldown timer
+            Debug.Log("Attack04 executed, cooldown started");
         }
-
-        if (Input.GetKey(KeyCode.R))
+        else if (Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.R) && attack04Timer > 0)
         {
-            if (Input.GetKey(KeyCode.Q))
-            {
-                animator.Play("Attack.SwordAndShiled");
-            }
+            Debug.Log("Attack04 is on cooldown: " + attack04Timer + " seconds remaining");
         }
 
         transform.Translate(movement * moveSpeed * Time.deltaTime);
@@ -246,5 +247,4 @@ public class CharacterController : MonoBehaviour
             //Destroy(gameObject);
         }
     }
-
 }
