@@ -117,6 +117,7 @@ public class CharacterController : MonoBehaviour
         else if (other.gameObject.CompareTag("SwordActivator")) // When touching a specific object
         {
             ToggleSword(); // Toggle the sword visibility
+            Destroy(other.gameObject);
         }
 
     }
@@ -215,7 +216,7 @@ public class CharacterController : MonoBehaviour
         if (sword != null)
         {
             sword.SetActive(true);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
