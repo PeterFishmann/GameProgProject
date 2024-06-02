@@ -88,6 +88,33 @@ public class CharacterController : MonoBehaviour
             animator.Play("Attack02_SwordAndShiled");
         }
 
+        //Attack System with light attacks and 1 kind of heavy attack
+        if (Input.GetKey(KeyCode.Space))
+        {
+            animator.Play("Attack02_SwordAndShiled");
+        }
+
+        if (Input.GetKey(KeyCode.F))
+        {
+            animator.Play("Attack03_SwordAndShiled");
+        }
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            if (Input.GetKey(KeyCode.R))
+            {
+                animator.Play("Attack04_SwordAndShiled");
+            }
+        }
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            if (Input.GetKey(KeyCode.Q))
+            {
+                animator.Play("Attack.SwordAndShiled");
+            }
+        }
+
         transform.Translate(movement * moveSpeed * Time.deltaTime);
         transform.Rotate(0, turn * turnSpeed * Time.deltaTime, 0);
 
