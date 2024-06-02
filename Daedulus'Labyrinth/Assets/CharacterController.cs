@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,17 +22,17 @@ public class CharacterController : MonoBehaviour
     private float speedBoostDuration = 15f;
     private float speedBoostTimer = 0f;
 
+    [SerializeField] GameObject pauseMenu; // Declare pauseMenu at the class level
+
     void Start()
     {
-        [SerializeField] GameObject pauseMenu;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         health = 50;
         UpdateHealthUI();
         animator = GetComponent<Animator>();
         hits = 0;
-        pauseMenu.SetActive(false);
-
+        pauseMenu.SetActive(false); // Assign pauseMenu in the Start method
     }
 
     void Update()
@@ -52,7 +51,7 @@ public class CharacterController : MonoBehaviour
         float turn = 0f;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            pauseMenu.SetActive(true);
+            pauseMenu.SetActive(true); // Use pauseMenu
         }
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
