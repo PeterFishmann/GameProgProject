@@ -22,6 +22,8 @@ public class CharacterController : MonoBehaviour
     private float speedBoostDuration = 15f;
     private float speedBoostTimer = 0f;
 
+    public GameObject sword; // Reference to the sword GameObject
+
     [SerializeField] GameObject pauseMenu; // Declare pauseMenu at the class level
 
     void Start()
@@ -33,6 +35,15 @@ public class CharacterController : MonoBehaviour
         animator = GetComponent<Animator>();
         hits = 0;
         pauseMenu.SetActive(false); // Assign pauseMenu in the Start method
+
+        if (sword == null)
+        {
+            Debug.LogWarning("Sword reference is not assigned in the Inspector!");
+        }
+        else
+        {
+            sword.SetActive(false); // Initially, the sword is disabled
+        }
     }
 
     void Update()
@@ -102,6 +113,12 @@ public class CharacterController : MonoBehaviour
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.isKinematic = true;
         }
+
+        else if (other.gameObject.CompareTag("SwordActivator")) // When touching a specific object
+        {
+            ToggleSword(); // Toggle the sword visibility
+        }
+
     }
 
     void OnTriggerExit(Collider other)
@@ -188,4 +205,18 @@ public class CharacterController : MonoBehaviour
             animator.Play("Attack02_SwordAndShiled");
         }
     }
+    void ToggleSword()
+    {
+        sword.SetActive(!sword.activeSelf); // Toggle sword's active state
+    }
+
+    public void ActivateSword()
+    {
+        if (sword != null)
+        {
+            sword.SetActive(true);
+            Destroy(gameObject);
+        }
+    }
+
 }
