@@ -25,6 +25,7 @@ public class CharacterController : MonoBehaviour
 
     void Start()
     {
+        [SerializeField] GameObject pauseMenu;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         health = 50;
