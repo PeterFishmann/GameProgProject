@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,11 +8,24 @@ using UnityEngine.SceneManagement;
 
 public class SettingsMenu : MonoBehaviour
 {
+    public Slider MusicSlider;
+    public Slider SFXSlider;
+    public AudioMixer audioMixer;
     // Start is called before the first frame update
     void Start()
     {
-        
+        MusicSlider.onValueChanged.AddListener(SetVolume);
+        SFXSlider.onValueChanged.AddListener(SetSFX);
+
+        float volume = 0f;
+        float sfxVolume = 0f;
+        audioMixer.GetFloat("Master Volume", out volume);
+        audioMixer.GetFloat("SFX Volume", out sfxVolume);
+
+        MusicSlider.value = Mathf.Pow(10, volume / 20); // Convert from dB to linear value
+        SFXSlider.value = Mathf.Pow(10,sfxVolume /20);
     }
+
 
     // Update is called once per frame
     void Update()
@@ -36,11 +50,16 @@ public class SettingsMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void volumeAdjust()
+    public void SetVolume(float volume)
     {
+        audioMixer.SetFloat("Master Volume", Mathf.Log10(volume) * 20); // Convert to dB
 
     }
+    public void SetSFX(float sfxVolume)
+    {
+        audioMixer.SetFloat("SFX Volume", Mathf.Log10(sfxVolume) * 20); // Logarithmic scale for audio
 
+    }
 
     //public void PauseGame()
     //{
@@ -57,4 +76,5 @@ public class SettingsMenu : MonoBehaviour
     //}
 
 
+    
 }
