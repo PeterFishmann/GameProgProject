@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,17 +16,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (pauseMenu.activeSelf)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
+
         if (currentNumber < targetNumber)
         {
             timer += Time.deltaTime;
@@ -42,7 +33,9 @@ public class PauseMenu : MonoBehaviour
     {
         numberText.text = currentNumber.ToString();
     }
-
+    public void Settings(){
+        SceneManager.LoadScene("SettingsMenu"); 
+    }
     public void Pause()
     {
         pauseMenu.SetActive(true);
@@ -56,8 +49,9 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        pauseMenu.SetActive(false);
         Time.timeScale = 1;
+        pauseMenu.SetActive(false);
+
     }
 
     public void Restart()
