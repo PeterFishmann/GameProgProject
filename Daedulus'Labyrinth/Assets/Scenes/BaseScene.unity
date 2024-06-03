@@ -5704,7 +5704,7 @@ PrefabInstance:
     - target: {fileID: 606381896, guid: a26dff7c2b1259a4b8e1e03dd8b1d725, type: 3}
       propertyPath: pauseMenu
       value: 
-      objectReference: {fileID: 1633715001}
+      objectReference: {fileID: 0}
     - target: {fileID: 606381896, guid: a26dff7c2b1259a4b8e1e03dd8b1d725, type: 3}
       propertyPath: healthSlider
       value: 
@@ -5713,9 +5713,13 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4255693387633498211, guid: a26dff7c2b1259a4b8e1e03dd8b1d725, type: 3}
+      propertyPath: m_TagString
+      value: SwordActivator
+      objectReference: {fileID: 0}
     - target: {fileID: 5647898885105486652, guid: a26dff7c2b1259a4b8e1e03dd8b1d725, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5647898885105486652, guid: a26dff7c2b1259a4b8e1e03dd8b1d725, type: 3}
       propertyPath: m_TagString

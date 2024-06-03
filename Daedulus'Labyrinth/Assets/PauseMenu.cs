@@ -16,6 +16,17 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pauseMenu.activeSelf)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
+        }
 
         if (currentNumber < targetNumber)
         {
@@ -29,12 +40,15 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+
+
     public void UpdateNumberText()
     {
         numberText.text = currentNumber.ToString();
     }
-    public void Settings(){
-        SceneManager.LoadScene("SettingsMenu"); 
+    public void Settings()
+    {
+        SceneManager.LoadScene("SettingsMenu");
     }
     public void Pause()
     {
