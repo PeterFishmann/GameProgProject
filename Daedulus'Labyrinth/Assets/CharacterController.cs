@@ -9,7 +9,7 @@ public class CharacterController : MonoBehaviour
     public float moveSpeed = 5f;
     public int health;
     public Slider healthSlider;
-
+    int hits;
     public bool isPaused;
     Animator animator;
     AudioSource audio;
@@ -17,7 +17,7 @@ public class CharacterController : MonoBehaviour
     public float mouseSensitivity = 250f;
     private float rotationY = 0f;
     public float turnSpeed = 100f;
-
+    private float attack03Timer = 0f;
     private bool isSpeedBoosted = false;
     private float speedBoostDuration = 15f;
     private float speedBoostTimer = 0f;
@@ -36,6 +36,7 @@ public class CharacterController : MonoBehaviour
         animator = GetComponent<Animator>();
         audio = GetComponent<AudioSource>();
         isAttacking = false;
+        hits = 0;
         pauseMenu.SetActive(false);
 
         if (sword == null)
@@ -98,10 +99,7 @@ public class CharacterController : MonoBehaviour
         if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Space))
         {
             animator.Play("Attack02_SwordAndShiled");
-             if (audio != null)
-            {
-                audio.Play();
-            }
+            audio.Play();
             isAttacking = true;
         }
 
@@ -142,6 +140,16 @@ public class CharacterController : MonoBehaviour
                 }
             }
             isAttacking = false;
+        }
+        if (other.gameObject.name == "Grunt")
+        {
+            hits++;
+            if (hits == 4)
+            {
+                Destroy(other.gameObject);
+                hits = 0;
+                SceneManager.LoadScene("MainDungeon");
+            }
         }
         else if (other.gameObject.CompareTag("Door"))
         {
