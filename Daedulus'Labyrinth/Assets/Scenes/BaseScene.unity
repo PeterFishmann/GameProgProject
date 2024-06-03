@@ -3540,6 +3540,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5299352894704153646, guid: 5f1cf3fcc1acb1b4eb479d3826dfde11, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5f1cf3fcc1acb1b4eb479d3826dfde11, type: 3}
+--- !u!1 &1067560138 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5647898885105486652, guid: a26dff7c2b1259a4b8e1e03dd8b1d725, type: 3}
+  m_PrefabInstance: {fileID: 1729243023}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1083695829
 GameObject:
   m_ObjectHideFlags: 0
@@ -5226,6 +5231,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -5694,7 +5700,7 @@ PrefabInstance:
     - target: {fileID: 606381896, guid: a26dff7c2b1259a4b8e1e03dd8b1d725, type: 3}
       propertyPath: sword
       value: 
-      objectReference: {fileID: 403456351}
+      objectReference: {fileID: 1067560138}
     - target: {fileID: 606381896, guid: a26dff7c2b1259a4b8e1e03dd8b1d725, type: 3}
       propertyPath: pauseMenu
       value: 

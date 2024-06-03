@@ -103,19 +103,23 @@ public class CharacterController : MonoBehaviour
             isAttacking = true;
         }
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (attack03Timer <= 0)
             {
-                animator.Play("Attack03_SwordAndShiled");
-                attack03Timer = 15f;
-                Debug.Log("Attack03 executed, cooldown started");
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack04_SwordAndShiled"))
+                {
+                    animator.Play("Attack04_SwordAndShiled");
+                    attack03Timer = 15f;
+                    Debug.Log("Attack03 executed, cooldown started");
+                }
             }
             else
             {
                 Debug.Log("Attack03 is on cooldown: " + attack03Timer + " seconds remaining");
             }
         }
+
 
         transform.Translate(movement * moveSpeed * Time.deltaTime);
         transform.Rotate(0, turn * turnSpeed * Time.deltaTime, 0);
