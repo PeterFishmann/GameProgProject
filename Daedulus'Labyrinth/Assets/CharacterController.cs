@@ -21,6 +21,10 @@ public class CharacterController : MonoBehaviour
     private bool isSpeedBoosted = false;
     private float speedBoostDuration = 15f;
     private float speedBoostTimer = 0f;
+    
+    private bool isRoll = false;
+    public float dashDistance = 2f;
+    public float dashSpeed = 15f; // Time in seconds to complete the dash
 
     public GameObject sword;
 
@@ -68,34 +72,48 @@ public class CharacterController : MonoBehaviour
             attack03Timer -= Time.deltaTime;
         }
 
-        Vector3 movement = Vector3.zero;
-        float turn = 0f;
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             pauseMenu.SetActive(true); // Open pause menu
         }
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+
+        //movement
+        Vector3 movement = Vector3.zero;
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && isRoll == false)
         {
-            movement += Vector3.forward;
-            animator.Play("MoveFWD_Normal_RM_SwordAndShield");
+            StartCoroutine(Dash());
         }
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        else if(isRoll == false)
         {
-            movement += Vector3.back;
-            animator.Play("MoveBWD_Battle_RM_SwordAndShield");
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            {
+                movement += Vector3.forward;
+                animator.Play("MoveFWD_Normal_RM_SwordAndShield");
+            }
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            {
+                movement += Vector3.back;
+                animator.Play("MoveBWD_Battle_RM_SwordAndShield");
+            }
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            {
+                movement += Vector3.left;
+                animator.Play("MoveLFT_Battle_RM_SwordAndShield");
+            }
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                movement += Vector3.right;
+                animator.Play("MoveRGT_Battle_RM_SwordAndShield");
+            }
+            //normalize the value so that strafing isnt possible
+            if (movement.magnitude > 1)
+            {
+                movement.Normalize();
+            }
         }
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            movement += Vector3.left;
-            turn = -1f;
-            animator.Play("MoveLFT_Battle_RM_SwordAndShield");
-        }
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            movement += Vector3.right;
-            turn = 1f;
-            animator.Play("MoveRGT_Battle_RM_SwordAndShield");
-        }
+
         if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Space))
         {
             animator.Play("Attack02_SwordAndShiled");
@@ -103,16 +121,13 @@ public class CharacterController : MonoBehaviour
             isAttacking = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKey(KeyCode.E))
         {
             if (attack03Timer <= 0)
             {
-                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack04_SwordAndShiled"))
-                {
-                    animator.Play("Attack04_SwordAndShiled");
-                    attack03Timer = 15f;
-                    Debug.Log("Attack03 executed, cooldown started");
-                }
+                animator.Play("Attack03_SwordAndShiled");
+                attack03Timer = 15f;
+                Debug.Log("Attack03 executed, cooldown started");
             }
             else
             {
@@ -120,15 +135,43 @@ public class CharacterController : MonoBehaviour
             }
         }
 
-
         transform.Translate(movement * moveSpeed * Time.deltaTime);
-        transform.Rotate(0, turn * turnSpeed * Time.deltaTime, 0);
 
         // Handle mouse rotation
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         rotationY += mouseX;
         transform.rotation = Quaternion.Euler(0, rotationY, 0);
     }
+
+    //roll IEnumerator to calculate distance
+    IEnumerator Dash()
+    {
+        isRoll = true;
+        float remainingDistance = dashDistance;
+        Vector3 direction = transform.forward;
+
+        while (remainingDistance > 0f)
+        {
+            float moveDistance = dashSpeed * Time.deltaTime;
+            RaycastHit hit;
+            animator.Play("Attack04_Start_SwordAndShield");
+            if (Physics.Raycast(transform.position, direction, out hit, moveDistance))
+            {
+                transform.position = hit.point;
+                break;
+            }
+            else
+            {
+                // Move forward by moveDistance
+                transform.position += direction * moveDistance / 2;
+                remainingDistance -= moveDistance;
+            }
+
+            yield return null;
+        }
+        isRoll = false;
+    }
+
 
     void OnTriggerEnter(Collider other)
     {
