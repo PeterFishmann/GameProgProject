@@ -23,8 +23,8 @@ public class CharacterController : MonoBehaviour
     private float speedBoostTimer = 0f;
     
     private bool isRoll = false;
-    public float dashDistance = 2f;
-    public float dashSpeed = 15f; // Time in seconds to complete the dash
+    public float dashDistance = 5f;
+    public float dashSpeed = 10f; // Time in seconds to complete the dash
 
     public GameObject sword;
 
@@ -107,11 +107,6 @@ public class CharacterController : MonoBehaviour
                 movement += Vector3.right;
                 animator.Play("MoveRGT_Battle_RM_SwordAndShield");
             }
-            //normalize the value so that strafing isnt possible
-            if (movement.magnitude > 1)
-            {
-                movement.Normalize();
-            }
         }
 
         if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Space))
@@ -133,6 +128,12 @@ public class CharacterController : MonoBehaviour
             {
                 Debug.Log("Attack03 is on cooldown: " + attack03Timer + " seconds remaining");
             }
+        }
+
+        //normalize the value so that strafing isnt possible
+        if (movement.magnitude > 1)
+        {
+            movement.Normalize();
         }
 
         transform.Translate(movement * moveSpeed * Time.deltaTime);
@@ -157,13 +158,14 @@ public class CharacterController : MonoBehaviour
             animator.Play("Attack04_Start_SwordAndShield");
             if (Physics.Raycast(transform.position, direction, out hit, moveDistance))
             {
+                
                 transform.position = hit.point;
                 break;
             }
             else
             {
                 // Move forward by moveDistance
-                transform.position += direction * moveDistance / 2;
+                transform.position += direction * moveDistance;
                 remainingDistance -= moveDistance;
             }
 
