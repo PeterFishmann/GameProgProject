@@ -12,8 +12,8 @@ public class CharacterController : MonoBehaviour
 
     public bool isPaused;
     Animator animator;
-    int hits;
-
+    AudioSource audio;
+    bool isAttacking;
     public float mouseSensitivity = 250f;
     private float rotationY = 0f;
     public float turnSpeed = 100f;
@@ -21,8 +21,6 @@ public class CharacterController : MonoBehaviour
     private bool isSpeedBoosted = false;
     private float speedBoostDuration = 15f;
     private float speedBoostTimer = 0f;
-
-    private float attack03Timer = 0f;
 
     public GameObject sword;
 
@@ -36,7 +34,8 @@ public class CharacterController : MonoBehaviour
         health = 50;
         UpdateHealthUI();
         animator = GetComponent<Animator>();
-        hits = 0;
+        audio = GetComponent<AudioSource>();
+        isAttacking = false;
         pauseMenu.SetActive(false);
 
         if (sword == null)
@@ -76,27 +75,31 @@ public class CharacterController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            movement += Vector3.forward; // Move forward
+            movement += Vector3.forward;
+            animator.Play("MoveFWD_Normal_RM_SwordAndShield");
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
-            movement += Vector3.back; // Move backward
+            movement += Vector3.back;
+            animator.Play("MoveBWD_Battle_RM_SwordAndShield");
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            movement += Vector3.left; // Move left
+            movement += Vector3.left;
             turn = -1f;
+            animator.Play("MoveLFT_Battle_RM_SwordAndShield");
         }
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            movement += Vector3.right; // Move right
+            movement += Vector3.right;
             turn = 1f;
+            animator.Play("MoveRGT_Battle_RM_SwordAndShield");
         }
-
-        // Play attack animations
-        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Space))
         {
             animator.Play("Attack02_SwordAndShiled");
+            audio.Play();
+            isAttacking = true;
         }
 
         if (Input.GetKey(KeyCode.E))
@@ -125,15 +128,17 @@ public class CharacterController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // Handle collisions with various objects
-        if (other.gameObject.CompareTag("Enemy"))
+        if (isAttacking)
         {
-            hits++;
-            if (hits == 4)
+            if (other.gameObject.CompareTag("Enemy"))
             {
-                Destroy(other.gameObject);
-                hits = 0;
-                SceneManager.LoadScene("MainDungeon");
+                NpcController enemyController = other.GetComponent<NpcController>();
+                if (enemyController != null)
+                {
+                    enemyController.TakeDamage(25);
+                }
             }
+            isAttacking = false;
         }
         else if (other.gameObject.CompareTag("Door"))
         {
