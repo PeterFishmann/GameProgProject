@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeraController : MonoBehaviour
+public class HermesController : MonoBehaviour
 {
-    public int healAmount = 10;
-
-    private Vector3 originalPosition;
+    public float speedIncrease = 2f;
     private PauseMenu pauseMenu;
 
     void Start()
@@ -25,7 +23,7 @@ public class HeraController : MonoBehaviour
             CharacterController characterController = other.GetComponent<CharacterController>();
             if (characterController != null)
             {
-                characterController.TryHeal(pauseMenu, healAmount, this.gameObject);
+                characterController.TryIncreaseSpeed(pauseMenu, speedIncrease, this.gameObject);
             }
         }
     }
