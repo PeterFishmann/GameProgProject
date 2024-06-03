@@ -98,7 +98,10 @@ public class CharacterController : MonoBehaviour
         if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Space))
         {
             animator.Play("Attack02_SwordAndShiled");
-            audio.Play();
+             if (audio != null)
+            {
+                audio.Play();
+            }
             isAttacking = true;
         }
 
